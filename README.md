@@ -19,5 +19,5 @@ HTML5, CSS3, JavaScript (ES6), Bootstrap 5.3, Font Awesome Icons, GitHub Pages.
 - [x] **Chức năng nâng cao:** Đẩy nạp dữ liệu động linh hoạt từ các Card vào một cấu trúc Bootstrap Modal duy nhất.
 
 ## Link sản phẩm
-- GitHub Repository: [Điền Link Repo Của Nhóm Bạn Vào Đây]
-- GitHub Pages: [Điền Link Web Đã Deploy Của Nhóm Bạn Vào Đây]
+- GitHub Repository: [https://github.com/26310501009-cmd/midterm-web-phamvanson]
+- GitHub Pages: [https://26310501009-cmd.github.io/midterm-web-phamvanson/]

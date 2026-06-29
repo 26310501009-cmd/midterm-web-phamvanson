@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài viết chi tiết: Sức mạnh của UI/UX và Figma | 3AE CLUB</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-color: #f8f9fa;
+            --text-color: #212529;
+            --card-bg: #ffffff;
+            --primary-color: #0d6efd;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --card-bg: #1e1e1e;
+            --primary-color: #375a7f;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+            line-height: 1.8;
+        }
+
+        /* Thanh tiến trình đọc */
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: transparent;
+            z-index: 9999;
+        }
+        .progress-bar {
+            height: 4px;
+            background: linear-gradient(90deg, #ff4500, #0d6efd);
+            width: 0%;
+        }
+
+        /* Nút chuyển đổi Dark mode */
+        .theme-toggle {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 1000;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .article-content p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .quote-block {
+            border-left: 5px solid var(--primary-color);
+            padding-left: 1.5rem;
+            font-style: italic;
+            background-color: var(--card-bg);
+            border-radius: 0 8px 8px 0;
+        }
+
+        .toc-sticky {
+            position: sticky;
+            top: 40px;
+        }
+
+        .card-custom {
+            background-color: var(--card-bg);
+            border: 1px solid rgba(0,0,0,0.05);
+            border-radius: 12px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="progress-container">
+        <div class="progress-bar" id="readingProgress"></div>
+    </div>
+
+    <button class="btn btn-dark theme-toggle d-flex align-items-center justify-content-center" id="themeBtn">
+        <i class="fa-solid fa-moon fs-5"></i>
+    </button>
+
+    <header class="py-5 border-bottom bg-white" style="background: var(--card-bg);">
+        <div class="container py-4">
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-8">
+                    <span class="badge bg-primary-subtle text-primary mb-3 px-3 py-2 rounded-pill fw-semibold">GÓC CHUYÊN MÔN</span>
+                    <h1 class="display-5 fw-bold mb-4">Vén Màn Bí Mật Kỷ Nguyên Số: Team Thiết Kế UI/UX Làm Những Gì?</h1>
+                    <div class="d-flex align-items-center justify-content-center text-muted fs-6">
+                        <span class="me-3"><i class="fa-regular fa-calendar me-2"></i>Tháng 6, 2026</span>
+                        <span class="me-3"><i class="fa-regular fa-clock me-2"></i>5 phút đọc</span>
+                        <span><i class="fa-solid fa-user-pen me-2"></i>Ban Chuyên môn 3AE CLUB</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container py-5">
+        <div class="row g-5">
+            
+            <div class="col-lg-3 d-none d-lg-block">
+                <div class="toc-sticky p-4 card-custom">
+                    <h6 class="fw-bold uppercase mb-3"><i class="fa-solid fa-list-ol me-2"></i>Mục lục bài viết</h6>
+                    <nav class="nav flex-column small">
+                        <a class="nav-link text-decoration-none py-2 text-reset" href="#ux-research">1. Nghiên cứu UX</a>
+                        <a class="nav-link text-decoration-none py-2 text-reset" href="#ui-design">2. Thiết kế giao diện UI</a>
+                        <a class="nav-link text-decoration-none py-2 text-reset" href="#figma-power">3. Figma - Vũ khí tối thượng</a>
+                        <a class="nav-link text-decoration-none py-2 text-reset" href="#join-team">4. Cơ hội thực chiến</a>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="col-lg-9 article-content">
+                
+                <p class="lead fw-normal">
+                    Bạn đã bao giờ tự hỏi tại sao Facebook, TikTok hay Grab lại có sức hút khiến bạn lướt hàng giờ liền không chán? Câu trả lời không chỉ nằm ở thuật toán, mà còn nằm ở sự tính toán chi tiết từng pixel của các **Nhà thiết kế UI/UX**. Hãy cùng 3AE CLUB mổ xẻ hành trình tạo nên một sản phẩm số đẳng cấp.
+                </p>
+
+                <div class="my-4 text-center">
+                    <img src="https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?q=80&w=1000" class="img-fluid rounded-3 shadow-sm" alt="UIUX Workspace">
+                </div>
+
+                <h3 id="ux-research" class="fw-bold mt-5 mb-3 text-primary"><i class="fa-solid fa-magnifying-glass-chart me-2"></i>1. Nghiên Cứu Trải Nghiệm Người Dùng (UX Research)</h3>
+                <p>
+                    <strong>UX (User Experience)</strong> là trải nghiệm của người dùng khi tương tác với sản phẩm. Một giao diện đẹp đến mấy nhưng nếu nút bấm khó tìm, luồng thanh toán quá phức tạp thì đó là một thất bại về mặt UX.
+                </p>
+                <p>
+                    Tại Team UI/UX của chúng mình, công việc bắt đầu bằng việc đóng vai "thám tử":
+                </p>
+                <ul>
+                    <li><strong>Thấu hiểu khách hàng:</strong> Thực hiện phỏng vấn sâu, khảo sát hành vi để vẽ nên bức chân dung khách hàng mục tiêu (User Persona).</li>
+                    <li><strong>Vẽ bản đồ tư duy:</strong> Tạo dựng User Journey Map (Hành trình người dùng) để biết họ sẽ gặp khó khăn (Pain points) ở bước nào khi dùng app.</li>
+                    <li><strong>Xây dựng bộ khung (Wireframe):</strong> Sắp xếp bố cục logic trắng đen trước khi đổ màu sắc sặc sỡ lên giao diện.</li>
+                </ul>
+
+                <blockquote class="quote-block p-3 my-4">
+                    "Thiết kế không chỉ là sản phẩm trông như thế nào hay có cảm giác ra sao. Thiết kế là cách nó hoạt động." – Steve Jobs.
+                </blockquote>
+
+                <h3 id="ui-design" class="fw-bold mt-5 mb-3 text-success"><i class="fa-solid fa-wand-magic-sparkles me-2"></i>2. Thiết Kế Giao Diện (UI Design)</h3>
+                <p>
+                    Nếu UX là bộ xương và cơ quan nội tạng giúp ứng dụng vận hành logic, thì <strong>UI (User Interface)</strong> chính là lớp da thịt, quần áo thời thượng khoác lên bên ngoài. 
+                </p>
+                <p>
+                    Chúng mình không chỉ vẽ bừa một cái nút đỏ hay xanh. Tất cả đều tuân theo các quy chuẩn thị giác khắt khe:
+                </p>
+                <div class="row g-3 my-3">
+                    <div class="col-md-6">
+                        <div class="p-3 card-custom h-100">
+                            <h6><i class="fa-solid fa-circle-half-stroke text-warning me-2"></i>Tư duy màu sắc</h6>
+                            <p class="small text-muted mb-0">Áp dụng quy tắc phối màu 60-30-10, hiểu tâm lý học màu sắc để điều hướng sự chú ý của người dùng vào nút "Mua ngay".</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="p-3 card-custom h-100">
+                            <h6><i class="fa-solid fa-text-height text-info me-2"></i>Hệ thống phân cấp (Hierarchy)</h6>
+                            <p class="small text-muted mb-0">Sử dụng kích thước chữ (Typography), khoảng trắng (White space) hợp lý giúp mắt người đọc không bị mỏi.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 id="figma-power" class="fw-bold mt-5 mb-3 text-dark" style="color: var(--text-color);"><i class="fa-brands fa-figma me-2 text-danger"></i>3. Làm Chủ Figma – Vũ Khí Tối Thượng</h3>
+                <p>
+                    Không cần cài đặt rườm rà, nặng nề như Photoshop hay Illustrator, **Figma** hiện đang là ông vua không ngai trong làng thiết kế sản phẩm công nghệ nhờ khả năng làm việc nhóm theo thời gian thực (Real-time collaboration).
+                </p>
+                <p>
+                    Gia nhập Team UI/UX của 3AE CLUB, bạn sẽ được cầm tay chỉ việc các kỹ năng Figma từ cơ bản đến nâng cao:
+                </p>
+                <ol>
+                    <li><strong>Auto Layout:</strong> Bí thuật giúp giao diện tự co giãn thông minh tương thích với mọi màn hình từ iPhone, iPad đến Desktop PC.</li>
+                    <li><strong>Component & Design System:</strong> Tạo ra các nút bấm tái sử dụng được nhiều lần, chỉ cần sửa 1 nơi, hàng trăm trang web khác tự động cập nhật theo.</li>
+                    <li><strong>Smart Animate (Prototyping):</strong> Liên kết các màn hình tĩnh lại với nhau bằng hiệu ứng chuyển động sống động, tạo ra bản demo app chạy mượt mà như hàng thật để mang đi pitching hoặc bàn giao cho đội Dev (Lập trình viên).</li>
+                </ol>
+
+                <hr class="my-5">
+                <div id="join-team" class="p-4 p-md-5 rounded-3 bg-primary text-white text-center shadow">
+                    <h4 class="fw-bold mb-3">Bạn đã sẵn sàng biến ý tưởng thành sản phẩm thực tế?</h4>
+                    <p class="mb-4 text-white-50">Không quan trọng bạn là newbie chưa biết gì hay đã có nền tảng nghệ thuật. Chỉ cần bạn có đam mê với cái đẹp và trải nghiệm mượt mà, Ban UI/UX luôn mở rộng cửa!</p>
+                    <a href="https://forms.google.com" target="_blank" class="btn btn-light btn-lg text-primary fw-bold px-4">
+                        <i class="fa-solid fa-paper-plane me-2"></i>Nộp đơn ứng tuyển ngay
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // 1. Logic Xử lý thanh tiến trình đọc bài (Reading Progress)
+        window.addEventListener('scroll', () => {
+            const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('readingProgress').style.width = scrolled + '%';
+        });
+
+        // 2. Logic Bật/Tắt Chế độ tối (Dark Mode Toggle)
+        const themeBtn = document.getElementById('themeBtn');
+        const icon = themeBtn.querySelector('i');
+        
+        themeBtn.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            if (currentTheme === 'dark') {
+                document.documentElement.removeAttribute('data-theme');
+                icon.className = 'fa-solid fa-moon fs-5';
+                themeBtn.className = 'btn btn-dark theme-toggle d-flex align-items-center justify-content-center';
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                icon.className = 'fa-solid fa-sun fs-5';
+                themeBtn.className = 'btn btn-light theme-toggle d-flex align-items-center justify-content-center';
+            }
+        });
+    </script>
+</body>
+</html>

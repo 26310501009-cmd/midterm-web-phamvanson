@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Văn Hóa Truyền Thông Sông Đốc - Cà Mau | 3AE CLUB</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-ocean: #f0f7f9; /* Màu nền xanh nước biển nhạt */
+            --bg-card: #ffffff;
+            --text-dark: #0f2d37; /* Màu xanh đen thẫm đại dương */
+            --primary-color: #0284c7; /* Màu xanh biển Sông Đốc năng động */
+            --accent-sunset: #ea580c; /* Màu cam hoàng hôn cửa biển Tây */
+        }
+
+        [data-theme="dark"] {
+            --bg-ocean: #09181e;
+            --bg-card: #11252d;
+            --text-dark: #e2f1f5;
+            --primary-color: #38bdf8;
+            --accent-sunset: #f97316;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-ocean);
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+            line-height: 1.8;
+        }
+
+        .heading-serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Thanh tiến trình đọc bài */
+        .read-progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: transparent;
+            z-index: 9999;
+        }
+        .read-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-sunset));
+            width: 0%;
+        }
+
+        /* Nút đổi giao diện Darkmode */
+        .theme-btn-toggle {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 1000;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            box-shadow: 0 4px 15px rgba(2, 132, 199, 0.3);
+        }
+
+        .article-content p {
+            font-size: 1.1rem;
+            margin-bottom: 1.6rem;
+            text-align: justify;
+        }
+
+        .quote-camau {
+            border-left: 4px solid var(--accent-sunset);
+            background-color: var(--bg-card);
+            padding: 20px;
+            border-radius: 0 12px 12px 0;
+            font-style: italic;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+        }
+
+        .campaign-card {
+            background-color: var(--bg-card);
+            border: 1px solid rgba(2, 132, 199, 0.15);
+            border-radius: 14px;
+            transition: all 0.3s ease;
+        }
+        .campaign-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(2, 132, 199, 0.12);
+        }
+
+        /* Hộp tạo ý tưởng chiến dịch tự động */
+        .generator-box {
+            background: linear-gradient(135deg, #07232e, #031218);
+            border-radius: 16px;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+        #campaignOutput {
+            min-height: 90px;
+            transition: all 0.4s ease;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="read-progress-container">
+        <div class="read-progress-bar" id="readingBarIndicator"></div>
+    </div>
+
+    <button class="btn text-white theme-btn-toggle d-flex align-items-center justify-content-center" id="themeToggler" style="background: linear-gradient(135deg, var(--primary-color), var(--accent-sunset));">
+        <i class="fa-solid fa-anchor fs-5"></i>
+    </button>
+
+    <header class="py-5 bg-white border-bottom shadow-sm" style="background-color: var(--bg-card);">
+        <div class="container py-4 text-center">
+            <span class="badge mb-3 px-3 py-2 rounded-pill fs-6" style="background-color: rgba(2, 132, 199, 0.1); color: var(--primary-color);">
+                <i class="fa-solid fa-compass me-2"></i>Chiến dịch Truyền thông Cộng đồng Địa phương
+            </span>
+            <h1 class="display-4 fw-bold heading-serif mb-3">Văn Hóa Truyền Thông: Khơi Nguồn Phù Sa Cửa Biển Sông Đốc</h1>
+            <p class="lead text-muted mx-auto" style="max-width: 780px;">
+                Kết hợp văn học nghệ thuật miền sông nước với tư duy truyền thông hiện đại nhằm xây dựng các chiến dịch cộng đồng mang ý nghĩa nhân văn lớn lao cho quê hương Cà Mau.
+            </p>
+        </div>
+    </header>
+
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 article-content">
+                
+                <p class="fs-5 fw-medium text-secondary">
+                    Thị trấn cửa biển Sông Đốc (Trần Văn Thời, Cà Mau) vốn nổi tiếng là một trong những cảng cá sầm uất nhất vùng ĐBSCL. Nơi đây không chỉ cuộn trào nhịp sống giao thương, mà còn ẩn chứa kho tàng văn hóa dân gian miền biển vô cùng đặc sắc. Làm thế nào để mang những câu chuyện mặn mòi vị biển ấy chạm đến trái tim hàng triệu người? Đó chính là bài toán của **Văn Hóa Truyền Thông**.
+                </p>
+
+                <div class="my-4 text-center">
+                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1000" class="img-fluid rounded-4 shadow-sm" alt="Sông Đốc Cà Mau Beach View">
+                </div>
+
+                <h3 class="fw-bold heading-serif mt-5 mb-4" style="color: var(--primary-color);"><i class="fa-solid fa-ship me-2"></i>1. Chất Liệu Văn Học & Nghệ Thuật Đất Cửa Biển</h3>
+                <p>
+                    Để làm truyền thông cộng đồng có chiều sâu tại Sông Đốc, chúng ta không thể dùng những bài viết lý thuyết khô khan. Thay vào đó, người làm truyền thông cần đắm mình vào dòng chảy văn hóa bản địa:
+                </p>
+                <ul>
+                    <li><strong>Lễ hội Nghinh Ông Sông Đốc:</strong> Di sản văn hóa phi vật thể quốc gia, biểu tượng thiêng liêng thể hiện tình cảm, sự biết ơn của ngư dân với biển cả và cá Ông hộ mạng. Đây là chất liệu vàng cho các chiến dịch quảng bá văn hóa du lịch.</li>
+                    <li><strong>Văn học truyền miệng & Đờn ca tài tử:</strong> Những câu chuyện vượt sóng gió của những người đàn ông bám biển khơi xa, tiếng đờn kìm mộc mạc sau những ngày cập cảng là sợi dây gắn kết cảm xúc mạnh mẽ nhất.</li>
+                </ul>
+
+                <blockquote class="quote-camau my-4">
+                    "Gió sông Đốc thổi luồn qua rạch / Tình người vùng biển mặn mà chở che." Truyền thông bản địa chính là cách chúng ta dùng công nghệ số để dệt nên bức tranh tinh thần kiên cường, hào sảng của con người Đất Mũi.
+                </blockquote>
+
+                <h3 class="fw-bold heading-serif mt-5 mb-4" style="color: var(--accent-sunset);"><i class="fa-solid fa-users-gear me-2"></i>2. Kiến Tạo Chiến Dịch Cộng Đồng Ý Nghĩa Cho Sông Đốc</h3>
+                <p>
+                    Truyền thông hiện đại hướng về cộng đồng tại Sông Đốc tập trung giải quyết các bài toán thực tế thông qua các thông điệp nhân văn:
+                </p>
+
+                <div class="row g-4 my-3">
+                    <div class="col-md-6">
+                        <div class="p-4 campaign-card h-100">
+                            <h5 class="fw-bold d-flex align-items-center" style="color: var(--primary-color);">
+                                <i class="fa-solid fa-trash-arrow-up me-2"></i> Truyền Thông Xanh (Eco-Media)
+                            </h5>
+                            <p class="small text-muted mb-0">Xây dựng các chiến dịch thay đổi nhận thức của ngư dân và người dân quanh lưu vực sông Đốc về việc giảm thiểu rác thải nhựa trực tiếp ra đại dương, bảo vệ hệ sinh thái rừng ngập mặn.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="p-4 campaign-card h-100">
+                            <h5 class="fw-bold d-flex align-items-center" style="color: var(--accent-sunset);">
+                                <i class="fa-solid fa-heart-pulse me-2"></i> Tiếp Sức Hậu Phương Vươn Khơi
+                            </h5>
+                            <p class="small text-muted mb-0">Các dự án gây quỹ, truyền thông nhân đạo hướng về con em gia đình ngư dân nghèo, tôn vinh vai trò của những người phụ nữ nơi hậu phương giữ lửa gia đình khi tàu ra khơi.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="generator-box my-5 p-4 p-md-5 text-white text-center shadow">
+                    <h5 class="fw-bold mb-2 text-warning"><i class="fa-solid fa-wand-magic-sparkles me-2"></i> Trạm Sáng Tạo 3AE: Ý Tưởng Cho Sông Đốc - Cà Mau</h5>
+                    <p class="small text-white-50 mb-4">Hãy bấm nút phía dưới để nhận ngay một gợi ý khung chiến dịch truyền thông cộng đồng được thiết kế riêng cho địa bàn Sông Đốc!</p>
+                    
+                    <div class="p-3 mb-4 rounded bg-white bg-opacity-10 border border-info">
+                        <p id="campaignOutput" class="fs-5 fw-medium mb-0 d-flex align-items-center justify-content-center text-info">
+                            * Ý tưởng chiến dịch ý nghĩa của bạn sẽ xuất hiện tại đây *
+                        </p>
+                    </div>
+
+                    <button class="btn btn-light px-4 py-2 fw-bold rounded-pill text-dark" onclick="generateCaMauCampaign()">
+                        <i class="fa-solid fa-lightbulb text-warning me-2"></i> Khởi Tạo Chiến Dịch
+                    </button>
+                </div>
+
+                <p>
+                    Khám phá văn hóa không chỉ để cất giữ trong bảo tàng, truyền thông cộng đồng không chỉ để lấy thành tích. Khi hai yếu tố này kết hợp tại mảnh đất Sông Đốc - Cà Mau, chúng sẽ trở thành nguồn năng lượng to lớn thúc đẩy sự phát triển bền vững, giữ gìn hồn biển và nâng cao đời sống người dân local.
+                </p>
+
+                <div class="mt-5 p-5 text-center rounded-4 shadow-sm border" style="background-color: var(--bg-card);">
+                    <h4 class="fw-bold heading-serif mb-3">⚓ Hãy Cùng Chúng Tôi Ghi Lại Dấu Ấn Phù Sa</h4>
+                    <p class="text-muted mb-4">Bạn yêu mến vùng đất Cà Mau, thích lên ý tưởng sáng tạo nội dung hoặc muốn thực hiện các dự án cộng đồng có sức ảnh hưởng lớn? Ban Văn Hóa Truyền Thông 3AE CLUB luôn chào đón bạn đồng hành tham khảo và phát triển các dự án thực chiến.</p>
+                    <a href="https://forms.google.com" target="_blank" class="btn text-white btn-lg fw-bold px-4 rounded-pill shadow" style="background: linear-gradient(135deg, var(--primary-color), var(--accent-sunset));">
+                        <i class="fa-solid fa-paper-plane me-2"></i>Đăng Ký Đóng Góp Chiến Dịch
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // 1. Đồng bộ thanh tiến trình đọc theo chiều cuộn trang (Reading Progress)
+        window.addEventListener('scroll', () => {
+            const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('readingBarIndicator').style.width = scrolled + '%';
+        });
+
+        // 2. Dữ liệu thực tế và logic cho Bộ khởi tạo chiến dịch Sông Đốc - Cà Mau
+        const localThemes = [
+            "Nâng cao ý thức không xả rác nhựa tại Cảng cá lớn nhất Sông Đốc", 
+            "Quảng bá nét đẹp văn hóa linh thiêng của Lễ hội Nghinh Ông Sông Đốc", 
+            "Gìn giữ và lan tỏa nghệ thuật Đờn ca tài tử nơi xóm biển Tây", 
+            "Tôn vinh hành trình vươn khơi bám biển bảo vệ chủ quyền của ngư dân", 
+            "Tuyên truyền bảo vệ vành đai rừng ngập mặn phòng hộ ven biển Trần Văn Thời"
+        ];
+        
+        const localFormats = [
+            "Chuỗi phim ký sự ngắn trên TikTok/Reels mang tên 'Hồn Biển Sông Đốc'", 
+            "Triển lãm ảnh nghệ thuật trực tuyến kết hợp âm thanh tiếng sóng biển", 
+            "Dự án vẽ tranh tường cổ động (Mural Art) ngay tại khu vực bến tàu cảng cá", 
+            "Chuỗi Podcast phát thanh radio kết nối tâm sự ngư dân đất biển Tây", 
+            "Thử thách trực tuyến (Challenge) 'Check-in Sông Đốc - Lan tỏa sống xanh'"
+        ];
+        
+        const localImpacts = [
+            "khơi dậy lòng tự hào quê hương và ý thức bảo vệ môi trường biển.",
+            "thu hút du khách thập phương khám phá nét đẹp văn hóa độc đáo địa phương.",
+            "gắn kết tình yêu nghệ thuật truyền thống vào dòng chảy thế hệ trẻ.",
+            "góp phần xây dựng một cộng đồng làng cá Sông Đốc văn minh, an toàn, bền vững."
+        ];
+
+        function generateCaMauCampaign() {
+            const randTheme = localThemes[Math.floor(Math.random() * localThemes.length)];
+            const randFormat = localFormats[Math.floor(Math.random() * localFormats.length)];
+            const randImpact = localImpacts[Math.floor(Math.random() * localImpacts.length)];
+            
+            const outBox = document.getElementById('campaignOutput');
+            
+            // Hiệu ứng mượt mà (Fade in-out) tối ưu trải nghiệm UI
+            outBox.style.opacity = 0;
+            setTimeout(() => {
+                outBox.innerHTML = `⚓ <strong>Dự án:</strong> Triển khai <u>${randFormat}</u> nhằm <u>${randTheme}</u>, qua đó <u>${randImpact}</u>`;
+                outBox.style.opacity = 1;
+                outBox.className = "fs-5 fw-medium mb-0 text-white text-start";
+            }, 200);
+        }
+
+        // 3. Logic Đổi giao diện Sáng / Tối (Theme Switcher)
+        const toggler = document.getElementById('themeToggler');
+        toggler.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            if (currentTheme === 'dark') {
+                document.documentElement.removeAttribute('data-theme');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        });
+    </script>
+</body>
+</html>

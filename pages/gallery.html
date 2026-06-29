@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lập Trình Web Cơ Bản | 3AE CLUB</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-body: #f4f5f7;
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --primary-tech: #6366f1; /* Màu tím Indigo công nghệ */
+        }
+
+        [data-theme="dark"] {
+            --bg-body: #0f172a;
+            --bg-card: #1e293b;
+            --text-main: #f1f5f9;
+            --primary-tech: #818cf8;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            transition: all 0.3s ease;
+            line-height: 1.8;
+        }
+
+        .code-font {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Thanh tiến trình đọc bài */
+        .reading-line {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: transparent;
+            z-index: 9999;
+        }
+        .reading-line-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #6366f1, #3b82f6);
+            width: 0%;
+        }
+
+        /* Khối hiển thị Code mô phỏng */
+        .code-window {
+            background-color: #0f172a;
+            color: #38bdf8;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Khu vực Demo trực quan */
+        .demo-box {
+            border: 2px dashed #cbd5e1;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            background-color: var(--bg-card);
+            transition: all 0.3s;
+        }
+
+        .theme-switcher {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 1000;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="reading-line">
+        <div class="reading-line-fill" id="progressBar"></div>
+    </div>
+
+    <button class="btn btn-indigo text-white theme-switcher d-flex align-items-center justify-content-center" id="btnTheme" style="background-color: var(--primary-tech);">
+        <i class="fa-solid fa-code fs-5"></i>
+    </button>
+
+    <header class="py-5 bg-white border-bottom shadow-sm" style="background-color: var(--bg-card);">
+        <div class="container py-3 text-center">
+            <span class="badge mb-3 px-3 py-2 rounded-pill fs-6" style="background-color: rgba(99, 102, 241, 0.15); color: var(--primary-tech);">
+                <i class="fa-solid fa-laptop-code me-2"></i>Frontend Development
+            </span>
+            <h1 class="display-5 fw-bold mb-3">Bước Chân Vào Thế Giới Mã Nguồn: Lập Trình Web Cơ Bản</h1>
+            <p class="lead text-muted mx-auto" style="max-width: 650px;">
+                Cùng 3AE CLUB khám phá bộ ba quyền lực HTML, CSS, JavaScript và cách các thư viện hiện đại đang định hình internet ngày nay.
+            </p>
+        </div>
+    </header>
+
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                
+                <p class="fs-5">
+                    Mỗi trang web bạn truy cập hàng ngày giống như một ngôi nhà kỹ thuật số. Để xây dựng được ngôi nhà đó, các lập trình viên Frontend (Phát triển giao diện) cần sử dụng những công cụ cốt lõi nhất. Nếu bạn là một người mới bắt đầu (Newbie), đây chính là tấm bản đồ dành cho bạn.
+                </p>
+
+                <h3 class="fw-bold mt-5 mb-4" style="color: var(--primary-tech);"><i class="fa-solid fa-cubes me-2"></i>1. Bộ Ba Quyền Lực Khởi Đầu</h3>
+                <p>Để dễ hình dung, hãy tưởng tượng bạn đang tạo ra một con robot hoặc một thực thể sống:</p>
+                
+                <div class="row g-4 my-3">
+                    <div class="col-md-4">
+                        <div class="p-3 rounded-3 h-100 shadow-sm border" style="background-color: var(--bg-card);">
+                            <h5 class="fw-bold text-danger"><i class="fa-brands fa-html5 me-2"></i>HTML</h5>
+                            <p class="small text-muted mb-0"><strong>Bộ xương (Skeleton):</strong> Định hình cấu trúc dữ liệu, tạo ra các khối văn bản, hình ảnh, nút bấm thô sơ.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-3 rounded-3 h-100 shadow-sm border" style="background-color: var(--bg-card);">
+                            <h5 class="fw-bold text-primary"><i class="fa-brands fa-css3-alt me-2"></i>CSS</h5>
+                            <p class="small text-muted mb-0"><strong>Lớp da thịt & Thời trang (Style):</strong> Tô màu, căn chỉnh bố cục, tạo hiệu ứng chuyển động bắt mắt cho trang web.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="p-3 rounded-3 h-100 shadow-sm border" style="background-color: var(--bg-card);">
+                            <h5 class="fw-bold text-warning"><i class="fa-brands fa-js me-2"></i>JavaScript</h5>
+                            <p class="small text-muted mb-0"><strong>Hệ thần kinh (Brain):</strong> Giúp trang web "sống dậy", xử lý các logic tương tác khi người dùng click, gõ phím hay gửi dữ liệu.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="my-5 p-4 rounded-3 text-white" style="background-color: #1e293b;">
+                    <h5 class="fw-bold mb-3 code-font text-warning"><i class="fa-solid fa-terminal me-2"></i>Interactive Lab: Thử nghiệm tương tác ngay!</h5>
+                    <p class="small text-white-50">Dưới đây là một hộp Demo. Hãy bấm các nút tương ứng để xem sức mạnh của từng ngôn ngữ.</p>
+                    
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="code-window code-font small h-100">
+                                <div><span class="text-warning">&lt;button</span> <span class="text-info">id=</span><span class="text-success">"demo"</span><span class="text-warning">&gt;</span>Robot<span class="text-warning">&lt;/button&gt;</span></div>
+                                <div class="text-secondary">/* CSS style */</div>
+                                <div class="text-primary-emphasis">.magic { background: purple; color: white; border-radius: 20px; }</div>
+                                <div class="text-secondary">// JS Action</div>
+                                <div class="text-info">alert("Xin chào thế giới Code!");</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 d-flex flex-column justify-content-center bg-dark rounded-3 p-3 text-center">
+                            <div class="mb-3">
+                                <button id="targetElement" class="btn btn-light">Thành phần thô (HTML)</button>
+                            </div>
+                            <div class="d-grid gap-2 d-md-block">
+                                <button class="btn btn-sm btn-primary" onclick="applyCSS()">1. Bơm CSS (Trang trí)</button>
+                                <button class="btn btn-sm btn-warning" onclick="applyJS()">2. Kích hoạt JS (Hành động)</button>
+                                <button class="btn btn-sm btn-secondary" onclick="resetDemo()">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="fw-bold mt-5 mb-4" style="color: var(--primary-tech);"><i class="fa-solid fa-rocket me-2"></i>2. Nâng Cấp Với Thư Viện Hiện Đại</h3>
+                <p>
+                    Khi đã thành thục nền tảng cơ bản, bạn sẽ được tiếp cận với thế giới của các framework và thư viện tối tân nhằm tăng tốc độ làm dự án:
+                </p>
+                <ul>
+                    <li><strong>Bootstrap 5 / Tailwind CSS:</strong> Giúp bạn "mặc quần áo đẹp" cho web chỉ trong vài giây thông qua các class viết sẵn (như chiếc trang web bạn đang xem này!).</li>
+                    <li><strong>ReactJS / VueJS:</strong> Thư viện Javascript hàng đầu giúp quản lý dữ liệu tối ưu, biến các thành phần trên web thành những khối linh kiện (Components) có thể tái sử dụng dễ dàng.</li>
+                </ul>
+
+                <div class="mt-5 p-4 text-center rounded-3 shadow-sm border" style="background-color: var(--bg-card);">
+                    <h4 class="fw-bold mb-3">💻 Bạn muốn tự tay gõ ra dòng Code đầu tiên?</h4>
+                    <p class="text-muted mb-4">Lớp học Lập Trình Web Cơ Bản của 3AE CLUB luôn chào đón các bạn từ số 0 đi lên. Hãy tham gia cùng chúng mình để làm chủ công nghệ nhé!</p>
+                    <a href="https://forms.google.com" target="_blank" class="btn text-white btn-lg fw-bold px-4 shadow" style="background-color: var(--primary-tech);">
+                        <i class="fa-solid fa-code-branch me-2"></i>Gia nhập Team Web Dev
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // 1. Đồng bộ thanh tiến trình đọc (Reading Progress)
+        window.addEventListener('scroll', () => {
+            const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        });
+
+        // 2. Logic cho bộ mô phỏng Live Demo trong bài viết
+        const target = document.getElementById('targetElement');
+        
+        function applyCSS() {
+            target.style.background = 'linear-gradient(45deg, #6366f1, #ec4899)';
+            target.style.color = '#fff';
+            target.style.borderRadius = '30px';
+            target.style.boxShadow = '0 5px 15px rgba(99,102,241,0.4)';
+            target.innerText = "Robot Đã Được Thêm CSS ✨";
+        }
+
+        function applyJS() {
+            target.innerText = "Robot Đang Chạy (JS)! 🧠";
+            setTimeout(() => {
+                alert("Xin chào! Đây là thông báo được kích hoạt bằng JavaScript đó!");
+            }, 100);
+        }
+
+        function resetDemo() {
+            target.style = '';
+            target.className = 'btn btn-light';
+            target.innerText = "Thành phần thô (HTML)";
+        }
+
+        // 3. Logic Đổi màu giao diện sáng / tối (Theme)
+        const btnTheme = document.getElementById('btnTheme');
+        btnTheme.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            if(currentTheme === 'dark') {
+                document.documentElement.removeAttribute('data-theme');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        });
+    </script>
+</body>
+</html>

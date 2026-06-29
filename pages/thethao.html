@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thể Thao & Thể Chất Trần Văn Thời - Cà Mau | 3AE CLUB</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-stadium: #f3f7f5; /* Màu nền sân vận động nhạt nhẹ */
+            --bg-card: #ffffff;
+            --text-dark: #111827;
+            --primary-sport: #047857; /* Màu xanh lá thể thao/sân cỏ */
+            --accent-energy: #f97316; /* Màu cam năng lượng quả bóng rổ */
+        }
+
+        [data-theme="dark"] {
+            --bg-stadium: #0b1511;
+            --bg-card: #12221a;
+            --text-dark: #f3f4f6;
+            --primary-sport: #10b981;
+            --accent-energy: #fb923c;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-stadium);
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+            line-height: 1.8;
+        }
+
+        .heading-sport {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Thanh tiến trình đọc bài */
+        .sport-progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: transparent;
+            z-index: 9999;
+        }
+        .sport-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-sport), var(--accent-energy));
+            width: 0%;
+        }
+
+        /* Nút đổi giao diện Darkmode hình quả tạ */
+        .dumbbell-toggle {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 1000;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            box-shadow: 0 4px 15px rgba(4, 120, 87, 0.4);
+            border: none;
+        }
+
+        .article-content p {
+            font-size: 1.1rem;
+            margin-bottom: 1.6rem;
+            text-align: justify;
+        }
+
+        .sport-quote {
+            border-left: 5px solid var(--accent-energy);
+            background-color: var(--bg-card);
+            padding: 20px;
+            border-radius: 0 12px 12px 0;
+            font-style: italic;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+        }
+
+        .sport-card {
+            background-color: var(--bg-card);
+            border: 1px solid rgba(4, 120, 87, 0.15);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .sport-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(4, 120, 87, 0.12);
+        }
+
+        .sport-img {
+            height: 200px;
+            object-fit: cover;
+            width: 100%;
+        }
+
+        /* Hộp tiện ích tương tác lên lịch */
+        .planner-box {
+            background: linear-gradient(135deg, #062f22, #021710);
+            border-radius: 16px;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+        #plannerOutput {
+            min-height: 100px;
+            transition: all 0.4s ease;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sport-progress-container">
+        <div class="sport-progress-bar" id="sportIndicator"></div>
+    </div>
+
+    <button class="btn text-white dumbbell-toggle d-flex align-items-center justify-content-center" id="btnSportTheme" style="background: linear-gradient(135deg, var(--primary-sport), var(--accent-energy));">
+        <i class="fa-solid fa-dumbbell fs-5"></i>
+    </button>
+
+    <header class="py-5 bg-white border-bottom shadow-sm" style="background-color: var(--bg-card);">
+        <div class="container py-4 text-center">
+            <span class="badge mb-3 px-3 py-2 rounded-pill fs-6" style="background-color: rgba(4, 120, 87, 0.1); color: var(--primary-sport);">
+                <i class="fa-solid fa-heart-pulse me-2"></i>Sức Khỏe Cộng Đồng & Tinh Thần Đồng Đội
+            </span>
+            <h1 class="display-4 fw-bold heading-sport mb-3">Khơi Dậy Sức Trẻ: Phong Trào Thể Thao Tại Trần Văn Thời</h1>
+            <p class="lead text-muted mx-auto" style="max-width: 800px;">
+                Nâng cao thể chất, rèn luyện ý chí và thắt chặt tinh thần đoàn kết qua các bộ môn bóng rổ, cầu lông và võ thuật trên quê hương Đất Mũi Cà Mau.
+            </p>
+        </div>
+    </header>
+
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-9 article-content">
+                
+                <p class="fs-5 fw-medium text-secondary">
+                    Một cộng đồng mạnh khỏe là nền tảng của một xã hội phát triển bền vững. Tại huyện Trần Văn Thời (Cà Mau), phong trào tập luyện thể dục thể thao không chỉ là phương thức nâng cao sức khỏe cá nhân, mà còn là sợi dây gắn kết tinh thần đồng đội cực kỳ bền chặt của những con người miền Tây hào sảng, kiên cường.
+                </p>
+
+                <div class="my-4 text-center">
+                    <img src="https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=1000" class="img-fluid rounded-4 shadow-sm" alt="Sports Arena Dynamic Track">
+                </div>
+
+                <h3 class="fw-bold heading-sport mt-5 mb-4" style="color: var(--primary-sport);"><i class="fa-solid fa-circle-play me-2"></i>1. Bộ Ba Bộ Môn Bùng Nổ Sức Trẻ Địa Phương</h3>
+                <p>
+                    Đi dọc qua các xã, thị trấn của huyện Trần Văn Thời, chúng ta dễ dàng bắt gặp bầu không khí sôi động từ các sân tập, câu lạc bộ. Trong đó, ba bộ môn mũi nhọn luôn thu hút đông đảo người dân tham gia:
+                </p>
+
+                <div class="row g-4 my-3">
+                    <div class="col-md-4">
+                        <div class="sport-card h-100">
+                            <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?q=80&w=600" class="sport-img" alt="Basketball action">
+                            <div class="p-3">
+                                <h5 class="fw-bold heading-sport text-danger"><i class="fa-solid fa-basketball me-2"></i>Bóng Rổ Hiện Đại</h5>
+                                <p class="small text-muted mb-0">Phát triển tư duy chiến thuật nhạy bén, chiều cao và đặc biệt là khả năng phối hợp đồng đội ăn ý trong từng đường kiến tạo, lên rổ.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="sport-card h-100">
+                            <img src="https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?q=80&w=600" class="sport-img" alt="Badminton smash">
+                            <div class="p-3">
+                                <h5 class="fw-bold heading-sport text-primary"><i class="fa-solid fa-icons me-2"></i>Cầu Lông Đại Chúng</h5>
+                                <p class="small text-muted mb-0">Rèn luyện phản xạ nhanh như chớp, sự dẻo dai toàn diện. Phù hợp cho mọi thế hệ giao lưu, gắn kết từ thanh niên đến người cao tuổi.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="sport-card h-100">
+                            <img src="https://images.unsplash.com/photo-1555597673-b21d5c935865?q=80&w=600" class="sport-img" alt="Martial arts stance">
+                            <div class="p-3">
+                                <h5 class="fw-bold heading-sport text-success"><i class="fa-solid fa-user-shield me-2"></i>Võ Thuật Bản Lĩnh</h5>
+                                <p class="small text-muted mb-0">Các lớp Vovinam, Võ cổ truyền giúp trang bị kỹ năng tự vệ, trân trọng tinh thần võ đạo và tôi luyện ý chí kiên định vượt qua nghịch cảnh.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <blockquote class="sport-quote my-4">
+                    "Muốn đi nhanh thì đi một mình, muốn đi xa thì đi cùng nhau." Tinh thần đồng đội trên sân bóng rổ, sự phối hợp bọc lót trong đôi nam nữ cầu lông, hay tình đồng môn nơi sân võ chính là bài học lớn lao về sự đoàn kết của người dân Trần Văn Thời.
+                </blockquote>
+
+                <h3 class="fw-bold heading-sport mt-5 mb-4" style="color: var(--accent-energy);"><i class="fa-solid fa-medal me-2"></i>2. Giá Trị Nhân Văn Đằng Sau Những Giọt Mồ Hôi</h3>
+                <p>
+                    Tham gia hoạt động thể chất không chỉ mang lại một cơ thể săn chắc, đẩy lùi bệnh tật mà còn trực tiếp xây dựng những phẩm chất quý giá cho thế hệ trẻ: rèn luyện tính kỷ luật (đúng giờ tập), học cách chấp nhận thất bại và đứng dậy sau những trận thua, tôn trọng đối thủ và biết hy sinh cái tôi cá nhân vì mục tiêu chung của tập thể.
+                </p>
+
+                <div class="planner-box my-5 p-4 p-md-5 text-white shadow">
+                    <h5 class="fw-bold heading-sport text-warning mb-2 text-center"><i class="fa-solid fa-calendar-check me-2"></i> Trạm Khởi Động: Thiết Kế Kế Hoạch Luyện Tập</h5>
+                    <p class="small text-white-50 text-center mb-4">Chọn mục tiêu cá nhân của bạn để nhận ngay gợi ý phân bổ thời gian và câu lạc bộ thực tế tại khu vực Trần Văn Thời!</p>
+                    
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-6">
+                            <label class="small text-white-50 mb-1">Chọn bộ môn yêu thích:</label>
+                            <select id="sportSelect" class="form-select bg-dark text-white border-secondary">
+                                <option value="basketball">🏀 Bóng rổ (Đội nhóm, bứt tốc)</option>
+                                <option value="badminton">🏸 Cầu lông (Phản xạ, bền bỉ)</option>
+                                <option value="martial">🥋 Võ thuật (Bản lĩnh, tự vệ)</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="small text-white-50 mb-1">Mục tiêu lớn nhất của bạn:</label>
+                            <select id="goalSelect" class="form-select bg-dark text-white border-secondary">
+                                <option value="health">Nâng cao sức khỏe, giảm stress</option>
+                                <option value="team">Tìm kiếm đồng đội, mở rộng giao lưu</option>
+                                <option value="discipline">Rèn tính kỷ luật, ý chí kiên định</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="p-3 mb-4 rounded bg-white bg-opacity-10 border border-success">
+                        <div id="plannerOutput" class="d-flex flex-column justify-content-center text-info">
+                            <span class="text-center text-white-50">* Kế hoạch luyện tập tối ưu cho bạn sẽ xuất hiện tại đây *</span>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <button class="btn btn-light px-4 py-2 fw-bold rounded-pill text-dark" onclick="generateSportPlan()">
+                            <i class="fa-solid fa-bolt text-warning me-2"></i> Xuất Kế Hoạch Ngay
+                        </button>
+                    </div>
+                </div>
+
+                <p>
+                    Hãy bước ra khỏi màn hình máy tính, xỏ giày vào và hòa mình vào tiếng đập bóng rổ rộn rã, tiếng đập cầu lông lách cách hay tiếng hô dõng dạc của những võ sinh tại các sân vận động xã, thị trấn Trần Văn Thời. Sức khỏe là vàng, và đồng đội là tài sản vô giá!
+                </p>
+
+                <div class="mt-5 p-5 text-center rounded-4 shadow-sm border" style="background-color: var(--bg-card);">
+                    <h4 class="fw-bold heading-sport mb-3">🔥 Đăng Ký Tham Gia Sinh Hoạt Thể Thao Tươi Trẻ</h4>
+                    <p class="text-muted mb-4">Bạn muốn tham gia vào đội nhóm phong trào, đăng ký giao lưu các giải đấu giao hữu nội bộ hoặc tìm kiếm người hướng dẫn tập luyện cơ bản? Ban Thể Thao 3AE CLUB luôn sẵn sàng hỗ trợ kết nối bạn.</p>
+                    <a href="https://forms.google.com" target="_blank" class="btn text-white btn-lg fw-bold px-4 rounded-pill shadow heading-sport" style="background: linear-gradient(135deg, var(--primary-sport), var(--accent-energy));">
+                        <i class="fa-solid fa-running me-2"></i> Đăng Ký Nhóm Luyện Tập
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // 1. Đồng bộ thanh tiến trình cuộn trang theo bài viết (Reading Progress)
+        window.addEventListener('scroll', () => {
+            const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('sportIndicator').style.width = scrolled + '%';
+        });
+
+        // 2. Logic Trình xử lý gợi ý kế hoạch thể thao Trần Văn Thời
+        function generateSportPlan() {
+            const sport = document.getElementById('sportSelect').value;
+            const goal = document.getElementById('goalSelect').value;
+            const output = document.getElementById('plannerOutput');
+            
+            let schedule = "";
+            let locationSuggestion = "";
+            let tip = "";
+
+            if (sport === "basketball") {
+                schedule = "📅 <strong>Lịch trình đề xuất:</strong> Thứ 2, 4, 6 từ 17:30 - 19:30 (Tập kỹ thuật ném rổ & đấu đối kháng chia đội).";
+                locationSuggestion = "📍 <strong>Địa điểm tham khảo:</strong> Sân bóng rổ Trung tâm Văn hóa Thể thao huyện Trần Văn Thời.";
+                if (goal === "health") tip = "💡 <strong>Mẹo thể lực:</strong> Chạy bứt tốc cự ly ngắn 15 phút trước khi đấu để tăng dung tích phổi.";
+                else if (goal === "team") tip = "💡 <strong>Mẹo đồng đội:</strong> Luôn hô gọi tên đồng đội khi chạy chỗ để tăng tính liên kết.";
+                else tip = "💡 <strong>Mẹo kỷ luật:</strong> Đặt mục tiêu ném phạt chuẩn xác 20 quả liên tục trước khi ra về.";
+            } else if (sport === "badminton") {
+                schedule = "📅 <strong>Lịch trình đề xuất:</strong> Thứ 3, 5, Chủ Nhật từ 18:00 - 20:00 (Rèn luyện di chuyển bước chân & kỹ thuật đập cầu).";
+                locationSuggestion = "📍 <strong>Địa điểm tham khảo:</strong> Câu lạc bộ Cầu lông Bờ Kè / Sân cầu lông công viên khóm tại thị trấn.";
+                if (goal === "health") tip = "💡 <strong>Mẹo thể lực:</strong> Tập các bài nhảy dây bổ trợ giúp cổ chân linh hoạt, dẻo dai.";
+                else if (goal === "team") tip = "💡 <strong>Mẹo đồng đội:</strong> Phân chia vùng kiểm tra rõ ràng với đồng đội trong nội dung đánh đôi.";
+                else tip = "💡 <strong>Mẹo kỷ luật:</strong> Tập trung tối đa, không bỏ sót bất kỳ đường cầu giao bóng nào.";
+            } else if (sport === "martial") {
+                schedule = "📅 <strong>Lịch trình đề xuất:</strong> Thứ 3, 5, 7 từ 17:00 - 19:00 (Luyện thể lực, học quyền pháp và các thế khóa gỡ tự vệ).";
+                locationSuggestion = "📍 <strong>Địa điểm tham khảo:</strong> Võ đường Vovinam / Lớp võ cổ truyền liên trường học Trần Văn Thời.";
+                if (goal === "health") tip = "💡 <strong>Mẹo thể lực:</strong> Thực hiện ép dẻo cơ đùi và cơ lưng kỹ càng tránh chấn thương khi đá cao.";
+                else if (goal === "team") tip = "💡 <strong>Mẹo đồng đội:</strong> Thảo luận, giúp đồng môn chỉnh sửa từng góc đấm, tấn pháp.";
+                else tip = "💡 <strong>Mẹo kỷ luật:</strong> Tuân thủ tuyệt đối khẩu lệnh của huấn luyện viên và tinh thần võ đạo.";
+            }
+
+            // Hiệu ứng chuyển động hiển thị text (Fade in)
+            output.style.opacity = 0;
+            setTimeout(() => {
+                output.innerHTML = `
+                    <div class="mb-2 text-white">${schedule}</div>
+                    <div class="mb-2 text-white">${locationSuggestion}</div>
+                    <div class="text-warning font-italic">${tip}</div>
+                `;
+                output.style.opacity = 1;
+            }, 200);
+        }
+
+        // 3. Logic Đổi màu nền Sáng / Tối (Theme Changer)
+        const themeBtn = document.getElementById('btnSportTheme');
+        themeBtn.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            if (currentTheme === 'dark') {
+                document.documentElement.removeAttribute('data-theme');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        });
+    </script>
+</body>
+</html>

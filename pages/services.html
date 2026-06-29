@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Câu Lạc Bộ Âm Nhạc | 3AE CLUB</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-page: #fffafb;
+            --bg-card: #ffffff;
+            --text-color: #2d2224;
+            --primary-music: #db2777; /* Màu hồng Rose lãng mạn, nghệ thuật */
+            --accent-music: #f59e0b;  /* Màu vàng Gold ấm áp của ánh đèn sân khấu */
+        }
+
+        [data-theme="dark"] {
+            --bg-page: #181214;
+            --bg-card: #251c1e;
+            --text-color: #f3f1f2;
+            --primary-music: #f43f5e;
+            --accent-music: #fbbf24;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-color);
+            transition: all 0.3s ease;
+            line-height: 1.8;
+        }
+
+        /* Thanh tiến trình đọc bài */
+        .progress-line {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: transparent;
+            z-index: 9999;
+        }
+        .progress-line-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-music), var(--accent-music));
+            width: 0%;
+        }
+
+        /* Nút đổi giao diện tối */
+        .theme-button {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 1000;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            box-shadow: 0 4px 15px rgba(219, 39, 119, 0.3);
+        }
+
+        .article-body p {
+            font-size: 1.1rem;
+            margin-bottom: 1.6rem;
+        }
+
+        /* Hiệu ứng Sóng nhạc (Visualizer) */
+        .visualizer-container {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            height: 60px;
+            gap: 6px;
+        }
+        .bar {
+            width: 6px;
+            height: 10px;
+            background-color: var(--primary-music);
+            border-radius: 3px;
+            transition: height 0.1s ease;
+        }
+        /* Animation nhảy sóng nhạc khi active */
+        .visualizer-container.playing .bar {
+            animation: bounce 0.8s ease infinite alternate;
+        }
+        .visualizer-container.playing .bar:nth-child(2) { animation-delay: 0.2s; }
+        .visualizer-container.playing .bar:nth-child(3) { animation-delay: 0.4s; }
+        .visualizer-container.playing .bar:nth-child(4) { animation-delay: 0.1s; }
+        .visualizer-container.playing .bar:nth-child(5) { animation-delay: 0.5s; }
+
+        @keyframes bounce {
+            100% { height: 60px; background-color: var(--accent-music); }
+        }
+
+        .card-instrument {
+            background-color: var(--bg-card);
+            border: 1px solid rgba(219, 39, 119, 0.1);
+            border-radius: 16px;
+            transition: all 0.3s;
+        }
+        .card-instrument:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(219, 39, 119, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="progress-line">
+        <div class="progress-line-fill" id="readingBar"></div>
+    </div>
+
+    <button class="btn text-white theme-button d-flex align-items-center justify-content-center" id="themeToggleBtn" style="background: linear-gradient(135deg, var(--primary-music), var(--accent-music));">
+        <i class="fa-solid fa-music fs-5"></i>
+    </button>
+
+    <header class="py-5 bg-white border-bottom" style="background-color: var(--bg-card); background-image: radial-gradient(rgba(219, 39, 119, 0.03) 1px, transparent 0); background-size: 24px 24px;">
+        <div class="container py-4 text-center">
+            <span class="badge mb-3 px-3 py-2 rounded-pill fs-6" style="background-color: rgba(219, 39, 119, 0.1); color: var(--primary-music);">
+                <i class="fa-solid fa-guitar me-2"></i>3AE Music Club
+            </span>
+            <h1 class="display-4 fw-bold mb-3" style="letter-spacing: -1px;">Nơi Những Giai Điệu Chạm Vào Tâm Hồn</h1>
+            <p class="lead text-muted mx-auto" style="max-width: 700px;">
+                Không gian kết nối đam mê ca hát, hòa âm phối khí, làm chủ nhạc cụ và lan tỏa năng lượng tích cực cùng những tâm hồn đồng điệu.
+            </p>
+        </div>
+    </header>
+
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 article-body">
+                
+                <p class="fs-5 fw-medium text-secondary">
+                    "Âm nhạc là tiếng vọng của cảm xúc." Có những điều từ ngữ không thể diễn tả hết, nhưng chỉ cần một hợp âm vang lên, một giọng ca cất bước, mọi khoảng cách đều bị xóa nhòa. Tại CLB Âm Nhạc của 3AE CLUB, chúng mình tin rằng ai cũng mang trong mình một tần số nghệ thuật riêng.
+                </p>
+
+                <div class="my-4 text-center">
+                    <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=1000" class="img-fluid rounded-4 shadow-sm" alt="Music Session">
+                </div>
+
+                <h3 class="fw-bold mt-5 mb-4" style="color: var(--primary-music);"><i class="fa-solid fa-microphone-lines me-2"></i>1. Bạn Sẽ Tìm Thấy Gì Ở Đại Gia Đình Âm Nhạc?</h3>
+                <p>Dù bạn là một người thích đứng dưới ánh đèn sân khấu hay thầm lặng đứng sau những bản phối, chúng mình đều có không gian dành cho bạn:</p>
+
+                <div class="row g-4 my-3">
+                    <div class="col-md-6">
+                        <div class="p-4 card-instrument h-100">
+                            <h5 class="fw-bold d-flex align-items-center" style="color: var(--primary-music);">
+                                <i class="fa-solid fa-record-vinyl me-2"></i> Team Vocal (Ca Sĩ)
+                            </h5>
+                            <p class="small text-muted mb-0">Nơi luyện tập giải phóng giọng hát, kỹ thuật lấy hơi, xử lý bài hát từ Pop, Ballad đến Rock và tự tin làm chủ chiếc Microphone trên sân khấu lớn.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="p-4 card-instrument h-100">
+                            <h5 class="fw-bold d-flex align-items-center" style="color: var(--accent-music);">
+                                <i class="fa-solid fa-drum me-2"></i> Team Instrument (Nhạc Công)
+                            </h5>
+                            <p class="small text-muted mb-0">Hội tụ các tay đàn Guitar, Piano, Ukulele, Cajon... Cùng nhau học cách bấm hợp âm, bắt nhịp band và phối hợp nhịp nhàng trong các buổi Acoustic.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="my-5 p-4 rounded-4 text-center shadow-sm text-white" style="background: linear-gradient(135deg, #2d1b24, #150d11); border: 1px solid rgba(219,39,119,0.2);">
+                    <h5 class="fw-bold mb-2 text-warning"><i class="fa-solid fa-radio me-2"></i>3AE Jam Session Studio (Thử nghiệm)</h5>
+                    <p class="small text-white-50 mb-4">Nhấp vào nút bên dưới để khởi động luồng sóng âm và cảm nhận không khí một buổi tập nhạc tại câu lạc bộ!</p>
+                    
+                    <div class="visualizer-container mb-4" id="visualizer">
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                    </div>
+
+                    <button class="btn btn-outline-light px-4 py-2 fw-semibold rounded-pill" id="playMusicBtn" onclick="toggleMusicSimulation()">
+                        <i class="fa-solid fa-play me-2"></i> Bật Giai Điệu CLB
+                    </button>
+                </div>
+
+                <h3 class="fw-bold mt-5 mb-4" style="color: var(--primary-music);"><i class="fa-solid fa-calendar-days me-2"></i>2. Các Sân Chơi Thường Niên</h3>
+                <ul>
+                    <li><strong>Acoustic Night cuối tuần:</strong> Những buổi tối tắt đèn điện, thắp nến và cùng ngồi lại hát cho nhau nghe những bản tình ca mộc mạc.</li>
+                    <li><strong>Đại nhạc hội 3AE Gala:</strong> Sân khấu bùng nổ âm thanh, ánh sáng chuyên nghiệp để các thành viên tỏa sáng trước toàn trường.</li>
+                    <li><strong>Workshop kiến thức:</strong> Chia sẻ kinh nghiệm đệm hát cơ bản, cách viết một bài hát mới và sử dụng các phần mềm thu âm cơ bản.</li>
+                </ul>
+
+                <div class="mt-5 p-5 text-center rounded-4 shadow-sm border-start border-4" style="background-color: var(--bg-card); border-left-color: var(--primary-music) !important;">
+                    <h4 class="fw-bold mb-3">✨ Đừng Để Những Giai Điệu Chỉ Vang Lên Trong Tâm Trí</h4>
+                    <p class="text-muted mb-4">Bạn không cần phải hát thật hay, không cần chơi nhạc cụ thật giỏi khi bắt đầu. Chỉ cần bạn mang theo một trái tim yêu âm nhạc, 3AE Music Club sẽ là bệ phóng cho bạn!</p>
+                    <a href="https://forms.google.com" target="_blank" class="btn text-white btn-lg fw-bold px-4 rounded-pill shadow" style="background: linear-gradient(135deg, var(--primary-music), var(--accent-music));">
+                        <i class="fa-solid fa-paper-plane me-2"></i>Đăng Ký Tham Gia Ngay
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // 1. Cập nhật thanh tiến trình đọc bài (Reading Progress)
+        window.addEventListener('scroll', () => {
+            const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('readingBar').style.width = scrolled + '%';
+        });
+
+        // 2. Logic điều khiển Sóng nhạc ảo (Visualizer Simulator)
+        let isPlaying = false;
+        const visualizer = document.getElementById('visualizer');
+        const playBtn = document.getElementById('playMusicBtn');
+
+        function toggleMusicSimulation() {
+            isPlaying = !isPlaying;
+            if (isPlaying) {
+                visualizer.classList.add('playing');
+                playBtn.innerHTML = '<i class="fa-solid fa-pause me-2"></i> Dừng Giai Điệu';
+                playBtn.classList.replace('btn-outline-light', 'btn-warning');
+            } else {
+                visualizer.classList.remove('playing');
+                playBtn.innerHTML = '<i class="fa-solid fa-play me-2"></i> Bật Giai Điệu CLB';
+                playBtn.classList.replace('btn-warning', 'btn-outline-light');
+            }
+        }
+
+        // 3. Logic Đổi màu nền Sáng / Tối (Theme Changer)
+        const themeBtn = document.getElementById('themeToggleBtn');
+        themeBtn.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            if (currentTheme === 'dark') {
+                document.documentElement.removeAttribute('data-theme');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        });
+    </script>
+</body>
+</html>
